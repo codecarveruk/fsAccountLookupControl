@@ -1,17 +1,15 @@
 import * as React from "react";
 import { ComboBox, IComboBoxOption, IComboBox } from "@fluentui/react";
 
-const options: IComboBoxOption[] = [
-    { key: '1', text: 'Account One' },
-    { key: '2', text: 'Account Two' },
-    { key: '3', text: 'Account Three' }
-];
+export interface AccountLookupProps {
+    options: IComboBoxOption[];
+    selectedKey?: string | number;
+    onChange: (key: string | number | undefined) => void;
+}
 
-const AccountLookup: React.FC = () => {
-    const [selectedKey, setSelectedKey] = React.useState<string | number | undefined>(undefined);
-
-    const onChange = (_event: React.FormEvent<IComboBox>, option?: IComboBoxOption) => {
-        setSelectedKey(option ? option.key : undefined);
+const AccountLookup: React.FC<AccountLookupProps> = ({ options, selectedKey, onChange }) => {
+    const handleChange = (_event: React.FormEvent<IComboBox>, option?: IComboBoxOption) => {
+        onChange(option ? option.key : undefined);
     };
 
     return (
@@ -19,7 +17,7 @@ const AccountLookup: React.FC = () => {
             label="Account"
             options={options}
             selectedKey={selectedKey}
-            onChange={onChange}
+            onChange={handleChange}
             placeholder="Select an account..."
             style={{ minWidth: 250 }}
         />
