@@ -18,6 +18,7 @@
       -->
     </external-service-usage>
     <property name="placeholder" display-name-key="Placeholder" description-key="Placeholder text" of-type="SingleLine.Text" usage="input" required="false" />
+    <property name="items" display-name-key="Items" description-key="Items to display" of-type="Entity" usage="bound" required="true" />
     <resources>
       <code path="index.ts" order="1"/>
       <platform-library name="React" version="16.14.0" />
