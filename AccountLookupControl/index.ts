@@ -6,6 +6,7 @@ import * as React from "react";
 export class AccountLookupControl implements ComponentFramework.ReactControl<IInputs, IOutputs> {
     private notifyOutputChanged: () => void;
     private selectedKey?: string | number;
+    private placeholder: string = "Select an account...";
 
     /**
      * Empty constructor.
@@ -27,6 +28,9 @@ export class AccountLookupControl implements ComponentFramework.ReactControl<IIn
         state: ComponentFramework.Dictionary
     ): void {
         this.notifyOutputChanged = notifyOutputChanged;
+        if (context.parameters.sampleProperty && context.parameters.sampleProperty.raw) {
+            this.placeholder = context.parameters.sampleProperty.raw;
+        }
     }
 
     /**
@@ -41,7 +45,8 @@ export class AccountLookupControl implements ComponentFramework.ReactControl<IIn
             onChange: (key: string | number | undefined) => {
                 this.selectedKey = key;
                 this.notifyOutputChanged();
-            }
+            },
+            placeholder: this.placeholder
         });
     }
 

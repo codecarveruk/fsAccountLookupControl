@@ -5,6 +5,7 @@ export interface AccountLookupProps {
     selectedKey?: string | number;
     onChange: (key: string | number | undefined) => void;
     context: ComponentFramework.Context<unknown>;
+    placeholder?: string;
 }
 
 interface AccountEntity {
@@ -12,7 +13,7 @@ interface AccountEntity {
     name: string;
 }
 
-const AccountLookup: React.FC<AccountLookupProps> = ({ selectedKey, onChange, context }) => {
+const AccountLookup: React.FC<AccountLookupProps> = ({ selectedKey, onChange, context, placeholder }) => {
     const [options, setOptions] = React.useState<IComboBoxOption[]>([]);
 
     React.useEffect(() => {
@@ -70,7 +71,7 @@ const AccountLookup: React.FC<AccountLookupProps> = ({ selectedKey, onChange, co
             selectedKey={selectedKey}
             onChange={handleChange}
             onInput={(event: React.FormEvent<IComboBox>, option?: IComboBoxOption, index?: number, value?: string) => { void handleFilter(event, option, index, value); }}
-            placeholder="Select an account..."
+            placeholder={placeholder || "Select an account..."}
             style={{ minWidth: 250 }}
         />
     );
