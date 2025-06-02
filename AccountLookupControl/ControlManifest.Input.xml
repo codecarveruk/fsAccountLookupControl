@@ -17,7 +17,7 @@
       <domain></domain>
       -->
     </external-service-usage>
-    <property name="placeholder" display-name-key="Placeholder_Display_Key" description-key="Placeholder_Desc_Key" of-type="SingleLine.Text" usage="input" required="false" />
+    <property name="placeholder" display-name-key="Placeholder" description-key="Placeholder text" of-type="SingleLine.Text" usage="input" required="false" />
     <resources>
       <code path="index.ts" order="1"/>
       <platform-library name="React" version="16.14.0" />
