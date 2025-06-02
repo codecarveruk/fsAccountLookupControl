@@ -1,5 +1,5 @@
 import { IInputs, IOutputs } from "./generated/ManifestTypes";
-import { HelloWorld, IHelloWorldProps } from "./HelloWorld";
+import AccountLookup from "./AccountLookup";
 import * as React from "react";
 
 export class AccountLookupControl implements ComponentFramework.ReactControl<IInputs, IOutputs> {
@@ -33,10 +33,7 @@ export class AccountLookupControl implements ComponentFramework.ReactControl<IIn
      * @returns ReactElement root react element for the control
      */
     public updateView(context: ComponentFramework.Context<IInputs>): React.ReactElement {
-        const props: IHelloWorldProps = { name: 'Power Apps' };
-        return React.createElement(
-            HelloWorld, props
-        );
+        return React.createElement(AccountLookup);
     }
 
     /**
