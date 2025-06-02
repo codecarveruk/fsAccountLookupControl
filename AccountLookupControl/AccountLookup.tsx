@@ -66,7 +66,6 @@ const AccountLookup: React.FC<AccountLookupProps> = ({ selectedKey, onChange, co
 
     return (
         <ComboBox
-            label="Account"
             options={options}
             selectedKey={selectedKey}
             onChange={handleChange}
