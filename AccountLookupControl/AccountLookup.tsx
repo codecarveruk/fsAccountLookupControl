@@ -72,6 +72,7 @@ const AccountLookup: React.FC<AccountLookupProps> = ({ selectedKey, onChange, co
             onInput={(event: React.FormEvent<IComboBox>, option?: IComboBoxOption, index?: number, value?: string) => { void handleFilter(event, option, index, value); }}
             placeholder={placeholder ?? "Select an account..."}
             style={{ minWidth: 250 }}
+            allowFreeInput={true}
         />
     );
 };
