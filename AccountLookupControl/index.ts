@@ -1,9 +1,16 @@
 import { IInputs, IOutputs } from "./generated/ManifestTypes";
-import AccountLookup from "./AccountLookup";
+import AccountLookup, { AccountLookupProps } from "./AccountLookup";
+import { IComboBoxOption } from "@fluentui/react";
 import * as React from "react";
 
 export class AccountLookupControl implements ComponentFramework.ReactControl<IInputs, IOutputs> {
     private notifyOutputChanged: () => void;
+    private selectedKey?: string | number;
+    private options: IComboBoxOption[] = [
+        { key: '1', text: 'Account One' },
+        { key: '2', text: 'Account Two' },
+        { key: '3', text: 'Account Three' }
+    ];
 
     /**
      * Empty constructor.
@@ -33,7 +40,14 @@ export class AccountLookupControl implements ComponentFramework.ReactControl<IIn
      * @returns ReactElement root react element for the control
      */
     public updateView(context: ComponentFramework.Context<IInputs>): React.ReactElement {
-        return React.createElement(AccountLookup);
+        return React.createElement(AccountLookup, {
+            options: this.options,
+            selectedKey: this.selectedKey,
+            onChange: (key: string | number | undefined) => {
+                this.selectedKey = key;
+                this.notifyOutputChanged();
+            }
+        });
     }
 
     /**
@@ -41,7 +55,7 @@ export class AccountLookupControl implements ComponentFramework.ReactControl<IIn
      * @returns an object based on nomenclature defined in manifest, expecting object[s] for property marked as "bound" or "output"
      */
     public getOutputs(): IOutputs {
-        return { };
+        return { sampleProperty: this.selectedKey ? String(this.selectedKey) : undefined };
     }
 
     /**
