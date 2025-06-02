@@ -19,7 +19,7 @@ const AccountLookup: React.FC<AccountLookupProps> = ({ selectedKey, onChange, co
         // Fetch accounts from Dataverse on mount
         const fetchAccounts = async () => {
             try {
-                const result = await context.webAPI.retrieveMultipleRecords("accounts", "$select=accountid,name&$top=10");
+                const result = await context.webAPI.retrieveMultipleRecords("account", "$select=accountid,name&$top=10");
                 const opts = (result.entities as AccountEntity[]).map((a) => ({
                     key: a.accountid,
                     text: a.name
@@ -40,7 +40,7 @@ const AccountLookup: React.FC<AccountLookupProps> = ({ selectedKey, onChange, co
         const filter = value ? `&$filter=contains(name,'${value.replace(/'/g, "''")}')` : '';
         try {
             const result = await context.webAPI.retrieveMultipleRecords(
-                "accounts",
+                "account",
                 `$select=accountid,name&$top=10${filter}`
             );
             const opts = (result.entities as AccountEntity[]).map((a) => ({
