@@ -6,11 +6,6 @@ import * as React from "react";
 export class AccountLookupControl implements ComponentFramework.ReactControl<IInputs, IOutputs> {
     private notifyOutputChanged: () => void;
     private selectedKey?: string | number;
-    private options: IComboBoxOption[] = [
-        { key: '1', text: 'Account One' },
-        { key: '2', text: 'Account Two' },
-        { key: '3', text: 'Account Three' }
-    ];
 
     /**
      * Empty constructor.
@@ -41,7 +36,7 @@ export class AccountLookupControl implements ComponentFramework.ReactControl<IIn
      */
     public updateView(context: ComponentFramework.Context<IInputs>): React.ReactElement {
         return React.createElement(AccountLookup, {
-            options: this.options,
+            context,
             selectedKey: this.selectedKey,
             onChange: (key: string | number | undefined) => {
                 this.selectedKey = key;

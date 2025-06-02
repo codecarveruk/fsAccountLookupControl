@@ -2,12 +2,36 @@ import * as React from "react";
 import { ComboBox, IComboBoxOption, IComboBox } from "@fluentui/react";
 
 export interface AccountLookupProps {
-    options: IComboBoxOption[];
     selectedKey?: string | number;
     onChange: (key: string | number | undefined) => void;
+    context: ComponentFramework.Context<unknown>;
 }
 
-const AccountLookup: React.FC<AccountLookupProps> = ({ options, selectedKey, onChange }) => {
+interface AccountEntity {
+    accountid: string;
+    name: string;
+}
+
+const AccountLookup: React.FC<AccountLookupProps> = ({ selectedKey, onChange, context }) => {
+    const [options, setOptions] = React.useState<IComboBoxOption[]>([]);
+
+    React.useEffect(() => {
+        // Fetch accounts from Dataverse on mount
+        const fetchAccounts = async () => {
+            try {
+                const result = await context.webAPI.retrieveMultipleRecords("account", "$select=accountid,name&$top=10");
+                const opts = (result.entities as AccountEntity[]).map((a) => ({
+                    key: a.accountid,
+                    text: a.name
+                }));
+                setOptions(opts);
+            } catch {
+                setOptions([]);
+            }
+        };
+        void fetchAccounts();
+    }, [context]);
+
     const handleChange = (_event: React.FormEvent<IComboBox>, option?: IComboBoxOption) => {
         onChange(option ? option.key : undefined);
     };
