@@ -28,8 +28,8 @@ export class AccountLookupControl implements ComponentFramework.ReactControl<IIn
         state: ComponentFramework.Dictionary
     ): void {
         this.notifyOutputChanged = notifyOutputChanged;
-        if (context.parameters.sampleProperty?.raw) {
-            this.placeholder = context.parameters.sampleProperty.raw;
+        if (context.parameters.placeholder?.raw) {
+            this.placeholder = context.parameters.placeholder.raw;
         }
     }
 
