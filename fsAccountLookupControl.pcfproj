@@ -9,7 +9,7 @@
 
   <PropertyGroup>
     <Name>fsAccountLookupControl</Name>
-    <ProjectGuid>bd8722b4-618e-43cf-824e-928c6d901319</ProjectGuid>
+    <ProjectGuid>f429b6f7-9a40-45ce-8c25-bb996045c2c9</ProjectGuid>
     <OutputPath>$(MSBuildThisFileDirectory)out\controls</OutputPath>
   </PropertyGroup>
 

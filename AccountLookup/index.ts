@@ -1,12 +1,9 @@
 import { IInputs, IOutputs } from "./generated/ManifestTypes";
-import AccountLookup, { AccountLookupProps } from "./AccountLookup";
-import { IComboBoxOption } from "@fluentui/react";
+import { HelloWorld, IHelloWorldProps } from "./HelloWorld";
 import * as React from "react";
 
-export class AccountLookupControl implements ComponentFramework.ReactControl<IInputs, IOutputs> {
+export class AccountLookup implements ComponentFramework.ReactControl<IInputs, IOutputs> {
     private notifyOutputChanged: () => void;
-    private selectedKey?: string | number;
-    private placeholder = "Select an account...";
 
     /**
      * Empty constructor.
@@ -28,9 +25,6 @@ export class AccountLookupControl implements ComponentFramework.ReactControl<IIn
         state: ComponentFramework.Dictionary
     ): void {
         this.notifyOutputChanged = notifyOutputChanged;
-        if (context.parameters.placeholder?.raw) {
-            this.placeholder = context.parameters.placeholder.raw;
-        }
     }
 
     /**
@@ -39,15 +33,10 @@ export class AccountLookupControl implements ComponentFramework.ReactControl<IIn
      * @returns ReactElement root react element for the control
      */
     public updateView(context: ComponentFramework.Context<IInputs>): React.ReactElement {
-        return React.createElement(AccountLookup, {
-            context,
-            selectedKey: this.selectedKey,
-            onChange: (key: string | number | undefined) => {
-                this.selectedKey = key;
-                this.notifyOutputChanged();
-            },
-            placeholder: this.placeholder
-        });
+        const props: IHelloWorldProps = { name: 'Power Apps' };
+        return React.createElement(
+            HelloWorld, props
+        );
     }
 
     /**
@@ -55,7 +44,7 @@ export class AccountLookupControl implements ComponentFramework.ReactControl<IIn
      * @returns an object based on nomenclature defined in manifest, expecting object[s] for property marked as "bound" or "output"
      */
     public getOutputs(): IOutputs {
-        return { sampleProperty: this.selectedKey ? String(this.selectedKey) : undefined };
+        return { };
     }
 
     /**
